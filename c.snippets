@@ -1,0 +1,82 @@
+# comment context
+global !p
+commentSymbols=["//"]
+def comment():
+	currentline = vim.current.line
+	for symbol in commentSymbols:
+		if symbol in currentline:
+			return False;
+	return True;
+endglobal
+
+
+# for function calls
+context "comment()"
+snippet { "function" iA
+{
+    $1
+}
+endsnippet
+
+# for if
+context "comment()"
+snippet if "if" iw
+if($1){
+    $0
+}
+endsnippet
+
+# for else if
+context "comment()"
+snippet elseif "elseif" wi
+else if($1){
+    $0
+}
+endsnippet
+
+# for else
+context "comment()"
+snippet else "else" wi
+else{
+    $1
+}
+endsnippet
+
+# for loop
+context "comment()"
+snippet for "for" wi
+for(${1:int i=0}; ${2:i<${3:10}}; ${4:i++}){
+    $0
+}
+endsnippet
+
+# while loop
+context "comment()"
+snippet while "while" wi
+while($1){
+    $0
+}
+endsnippet
+
+# template
+context "comment()"
+snippet main "main function" wi
+int main(){
+    $0
+
+    return 0;
+}
+endsnippet
+
+# default template
+context "comment()"
+snippet maintemp "main template" wA
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+    $0
+
+    return 0;
+}
+endsnippet

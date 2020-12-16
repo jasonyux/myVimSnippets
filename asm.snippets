@@ -1,0 +1,14 @@
+# registers in the form of an alphabet + number
+# (?<!...) means negative look behind on ...
+snippet "(?<!\$)([vatsk])(\d)" "registers" rA
+\$`!p snip.rv = match.group(1)``!p snip.rv = match.group(2)`
+endsnippet
+
+# other registers
+snippet "(?<!\$)([agsfr])([tpa])" "alphaRegisters" rA
+\$`!p snip.rv = match.group(1)``!p snip.rv = match.group(2)`
+endsnippet
+
+snippet jr "jr" wA
+jr \$ra
+endsnippet
