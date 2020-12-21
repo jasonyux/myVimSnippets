@@ -20,147 +20,8 @@ endglobal
 # snippet for starting a template
 snippet template "Basic template" b
 \documentclass[a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{textcomp}
-\usepackage{amsmath, amssymb, amsthm, framed}
-\usepackage[framemethod=TikZ]{mdframed}
-\usepackage{accents}
-\usepackage[utf8]{inputenc}
-\usepackage{hyperref}
-\usepackage{graphicx}
-\usepackage{scrextend}
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black
-}
 
-\newcounter{mytheo}[section]\setcounter{mytheo}{0}
-\renewcommand{\themytheo}{\arabic{section}.\arabic{mytheo}}
-\newenvironment{mytheo}[1][]{%
-    \refstepcounter{mytheo}%
-    \ifstrempty{#1}%
-        {\mdfsetup{%
-                frametitle={%
-                    \tikz[baseline=(current bounding box.east),outer sep=0pt]
-                    \node[anchor=east,rectangle,fill=blue!10]
-            {\strut Theorem~\themytheo};}}
-        }%
-        {\mdfsetup{%
-                frametitle={%
-                    \tikz[baseline=(current bounding box.east),outer sep=0pt]
-                    \node[anchor=east,rectangle,fill=blue!10]
-            {\strut Theorem~\themytheo:~#1};}}%
-        }%
-        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=blue!10,%
-            linewidth=1pt,topline=true,%
-            frametitleaboveskip=\dimexpr-\strutbox\relax
-        }
-    \begin{mdframed}[]\relax%
-    \label{theo \themytheo}%s
-        \begin{addmargin}[1em]{1em}}
-        {\end{addmargin}\end{mdframed}}
-
-\newcounter{mycoro}[section]\setcounter{mycoro}{0}
-\renewcommand{\themycoro}{\arabic{section}.\arabic{mycoro}}
-\newenvironment{mycoro}[1][]{%
-    \refstepcounter{mycoro}%
-    \ifstrempty{#1}%
-        {\mdfsetup{%
-                frametitle={%
-                    \tikz[baseline=(current bounding box.east),outer sep=0pt]
-                    \node[anchor=east,rectangle,fill=green!10]
-            {\strut Corollary~\themycoro};}}
-        }%
-        {\mdfsetup{%
-                frametitle={%
-                    \tikz[baseline=(current bounding box.east),outer sep=0pt]
-                    \node[anchor=east,rectangle,fill=green!10]
-            {\strut Corollary~\themycoro:~#1};}}%
-        }%
-        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=green!10,%
-            linewidth=1pt,topline=true,%
-            frametitleaboveskip=\dimexpr-\strutbox\relax
-        }
-        \begin{mdframed}[]\relax \label{coro \themycoro}%
-    \begin{addmargin}[1em]{1em}}
-        {\end{addmargin}\end{mdframed}}
-
-\newcounter{mydef}[section]\setcounter{mydef}{0}
-\renewcommand{\themydef}{\arabic{section}.\arabic{mydef}}
-\newenvironment{mydef}[1][]{%
-    \refstepcounter{mydef}%
-    \ifstrempty{#1}%
-        {\mdfsetup{%
-                frametitle={%
-                    \tikz[baseline=(current bounding box.east),outer sep=0pt]
-                    \node[anchor=east,rectangle,fill=red!10]
-            {\strut Definition~\themydef};}}
-        }%
-        {\mdfsetup{%
-                frametitle={%
-                    \tikz[baseline=(current bounding box.east),outer sep=0pt]
-                    \node[anchor=east,rectangle,fill=red!10]
-            {\strut Definition~\themydef:~#1};}}%
-        }%
-        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=red!10,%
-            linewidth=1pt,topline=true,%
-            frametitleaboveskip=\dimexpr-\strutbox\relax
-        }
-    \begin{mdframed}[]\relax%
-    \label{def \themydef}\begin{addmargin}[1em]{1em}}
-        {\end{addmargin}\end{mdframed}}
-
-\newenvironment{example}[1][]{%
-    \ifstrempty{#1}%
-        {\mdfsetup{%
-                frametitle={%
-                    \tikz[baseline=(current bounding box.east),outer sep=0pt]
-                    \node[anchor=east,rectangle,fill=pink!10]
-            {\strut \emph{Example}};}}
-        }%
-        {\mdfsetup{%
-                frametitle={%
-                    \tikz[baseline=(current bounding box.east),outer sep=0pt]
-                    \node[anchor=east,rectangle,fill=pink!10]
-            {\strut \emph{Example}:~#1};}}%
-        }%
-        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=pink!20,%
-            linewidth=1pt,topline=true,%
-            frametitleaboveskip=\dimexpr-\strutbox\relax
-        }
-        \begin{mdframed}[]\relax \label{exmp \themycoro}%
-    \begin{addmargin}[1em]{1em}}
-        {\end{addmargin}\end{mdframed}}
-
-\newenvironment{note}{%
-    \mdfsetup{
-        frametitle={Note:},
-        topline=false,bottomline=false,
-        frametitleaboveskip=-10pt,
-        innerleftmargin=-1pt,
-        linecolor=black!10,
-        linewidth=1pt
-    }
-    \begin{mdframed}      
-    \begin{addmargin}[1em]{1em}%        
-}{\end{addmargin}\end{mdframed}}
-
-\newenvironment{reminder}{%
-    \mdfsetup{
-        frametitle={\emph{Reminder:}},
-        topline=false,bottomline=false,
-        frametitleaboveskip=-10pt,
-        innerleftmargin=-1pt,
-        linecolor=black!10,
-        linewidth=1pt
-    }
-    \begin{mdframed}
-    \begin{addmargin}[1em]{1em}\begin{em}%
-}{\end{em}\end{addmargin}\end{mdframed}}
+\usepackage{lecturenotes} % ~/texmf/tex/latex/commonstuff/lecturenotes.sty
 
 \title{% 
     ${1:CSEE W3287}: ${2:Fundamentals of Computer Systems}\\\\ 
@@ -177,6 +38,8 @@ $0
 endsnippet
 
 # start snippet configuration
+
+### Start of Environment snippets
 snippet bgn "begin{} / end{}" bA
 \begin{$1}
 	$0
@@ -191,6 +54,26 @@ endsnippet
 snippet subsec* "subsection{}" bA
 \subsection*{$1}
     $0
+endsnippet
+
+snippet sec "section{}" b
+\section{$1}
+$0
+endsnippet
+
+snippet ssec "subsection{}" bA
+\subsection{$1}
+$0
+endsnippet
+
+snippet sssec "subsubsection{}" bA
+\subsubsection{$1}
+$0
+endsnippet
+
+snippet part* "part*{}" bA
+\part*{$1}
+$0
 endsnippet
 
 snippet olist "Enumerate" bA
@@ -217,6 +100,41 @@ snippet fbox "framed" w
 \end{framed}
 endsnippet
 
+snippet theo "my theorem" w
+\begin{mytheo}$1
+    $0
+\end{mytheo}
+endsnippet
+
+snippet def "my definition" w
+\begin{mydef}$1
+    $0
+\end{mydef}
+endsnippet
+
+snippet coro "my corollary" w
+\begin{mycoro}$1
+    $0
+\end{mycoro}
+endsnippet
+
+snippet example "my example" w
+\begin{example}$1
+    $0
+\end{example}
+endsnippet
+
+snippet note "my note" w
+\begin{note}$1
+    $0
+\end{note}
+endsnippet
+
+snippet reminder "my reminder" w
+\begin{reminder}$1
+    $0
+\end{reminder}
+endsnippet
 
 snippet inm "Math" wA
 $${1}$`!p
@@ -232,6 +150,8 @@ snippet dm "Math" wA
 $1
 \] $0
 endsnippet
+
+### End of Environment snippets
 
 snippet vspace "Visible Space" wA
 \textvisiblespace
@@ -583,3 +503,11 @@ snippet "(.*)(\.png|\.jpg|\.jpeg)" "insert picture" rA
 \end{figure}
 endsnippet
 ### end of image sippets
+
+### Start of Code snippets
+snippet code "code section" w
+\begin{lstlisting}[language=$1]
+$0
+\end{lstlisting}
+endsnippet
+### End of Code snippets
