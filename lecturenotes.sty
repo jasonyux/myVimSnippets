@@ -75,8 +75,7 @@
             frametitleaboveskip=\dimexpr-\strutbox\relax
         }
         \begin{mdframed}[]\relax%
-            \label{theo
-            \themytheo}%s
+            \label{theo:\themytheo}%s
         \begin{addmargin}[1em]{1em}}
         {\end{addmargin}\end{mdframed}}
 
@@ -110,8 +109,7 @@
             frametitleaboveskip=\dimexpr-\strutbox\relax
         }
         \begin{mdframed}[]\relax
-            \label{coro
-            \themycoro}%
+            \label{coro:\themycoro}%
         \begin{addmargin}[1em]{1em}}
         {\end{addmargin}\end{mdframed}}
 
@@ -145,8 +143,7 @@
             frametitleaboveskip=\dimexpr-\strutbox\relax
         }
         \begin{mdframed}[]\relax%
-            \label{def
-        \themydef}\begin{addmargin}[1em]{1em}}
+            \label{def:\themydef}\begin{addmargin}[1em]{1em}}
         {\end{addmargin}\end{mdframed}}
 
 \newenvironment{example}[1][]{%
@@ -176,8 +173,7 @@
             frametitleaboveskip=\dimexpr-\strutbox\relax
         }
         \begin{mdframed}[]\relax
-            \label{exmp
-            \themycoro}%
+            \label{example:\themycoro}%
         \begin{addmargin}[1em]{1em}}
         {\end{addmargin}\end{mdframed}}
 
@@ -194,16 +190,16 @@
         \begin{addmargin}[1em]{1em}%        
     }{\end{addmargin}\end{mdframed}}
 
-    \newenvironment{reminder}{%
-        \mdfsetup{
-            frametitle={\emph{Reminder:}},
-            topline=false,bottomline=false,
-            frametitleaboveskip=-10pt,
-            innerleftmargin=-1pt,
-            linecolor=black!10,
-            linewidth=1pt
-        }
-        \begin{mdframed}
-            \begin{addmargin}[1em]{1em}\begin{em}%
-        }{\end{em}\end{addmargin}\end{mdframed}}
+\newenvironment{reminder}{%
+    \mdfsetup{
+        frametitle={\emph{Reminder:}},
+        topline=false,bottomline=false,
+        frametitleaboveskip=-10pt,
+        innerleftmargin=-1pt,
+        linecolor=black!10,
+        linewidth=1pt
+    }
+    \begin{mdframed}
+        \begin{addmargin}[1em]{1em}\begin{em}%
+    }{\end{em}\end{addmargin}\end{mdframed}}
 \endinput
