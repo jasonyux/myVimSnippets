@@ -1,0 +1,209 @@
+\ProvidesPackage{lecturenotes}[2020/12/21 Xiao's custom Latex style]
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath, amssymb, amsthm, framed}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{accents}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{scrextend}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcounter{mytheo}[section]\setcounter{mytheo}{0}
+\renewcommand{\themytheo}{\arabic{section}.\arabic{mytheo}}
+\newenvironment{mytheo}[1][]{%
+    \refstepcounter{mytheo}%
+    \ifstrempty{#1}%
+        {\mdfsetup{%
+                frametitle={%
+                    \tikz[baseline=(current
+                    bounding
+                    box.east),outer
+                    sep=0pt]
+                    \node[anchor=east,rectangle,fill=blue!10]
+                    {\strut
+            Theorem~\themytheo};}}
+        }%
+        {\mdfsetup{%
+                frametitle={%
+                    \tikz[baseline=(current
+                    bounding
+                    box.east),outer
+                    sep=0pt]
+                    \node[anchor=east,rectangle,fill=blue!10]
+                    {\strut
+            Theorem~\themytheo:~#1};}}%
+        }%
+        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=blue!10,%
+            linewidth=1pt,topline=true,%
+            frametitleaboveskip=\dimexpr-\strutbox\relax
+        }
+        \begin{mdframed}[]\relax%
+            \label{theo
+            \themytheo}%s
+        \begin{addmargin}[1em]{1em}}
+        {\end{addmargin}\end{mdframed}}
+
+\newcounter{mycoro}[section]\setcounter{mycoro}{0}
+\renewcommand{\themycoro}{\arabic{section}.\arabic{mycoro}}
+\newenvironment{mycoro}[1][]{%
+    \refstepcounter{mycoro}%
+    \ifstrempty{#1}%
+        {\mdfsetup{%
+                frametitle={%
+                    \tikz[baseline=(current
+                    bounding
+                    box.east),outer
+                    sep=0pt]
+                    \node[anchor=east,rectangle,fill=green!10]
+                    {\strut
+            Corollary~\themycoro};}}
+        }%
+        {\mdfsetup{%
+                frametitle={%
+                    \tikz[baseline=(current
+                    bounding
+                    box.east),outer
+                    sep=0pt]
+                    \node[anchor=east,rectangle,fill=green!10]
+                    {\strut
+            Corollary~\themycoro:~#1};}}%
+        }%
+        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=green!10,%
+            linewidth=1pt,topline=true,%
+            frametitleaboveskip=\dimexpr-\strutbox\relax
+        }
+        \begin{mdframed}[]\relax
+            \label{coro
+            \themycoro}%
+        \begin{addmargin}[1em]{1em}}
+        {\end{addmargin}\end{mdframed}}
+
+\newcounter{mydef}[section]\setcounter{mydef}{0}
+\renewcommand{\themydef}{\arabic{section}.\arabic{mydef}}
+\newenvironment{mydef}[1][]{%
+    \refstepcounter{mydef}%
+    \ifstrempty{#1}%
+        {\mdfsetup{%
+                frametitle={%
+                    \tikz[baseline=(current
+                    bounding
+                    box.east),outer
+                    sep=0pt]
+                    \node[anchor=east,rectangle,fill=red!10]
+                    {\strut
+            Definition~\themydef};}}
+        }%
+        {\mdfsetup{%
+                frametitle={%
+                    \tikz[baseline=(current
+                    bounding
+                    box.east),outer
+                    sep=0pt]
+                    \node[anchor=east,rectangle,fill=red!10]
+                    {\strut
+            Definition~\themydef:~#1};}}%
+        }%
+        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=red!10,%
+            linewidth=1pt,topline=true,%
+            frametitleaboveskip=\dimexpr-\strutbox\relax
+        }
+        \begin{mdframed}[]\relax%
+            \label{def
+        \themydef}\begin{addmargin}[1em]{1em}}
+        {\end{addmargin}\end{mdframed}}
+
+\newenvironment{example}[1][]{%
+    \ifstrempty{#1}%
+        {\mdfsetup{%
+                frametitle={%
+                    \tikz[baseline=(current
+                    bounding
+                    box.east),outer
+                    sep=0pt]
+                    \node[anchor=east,rectangle,fill=pink!10]
+                    {\strut
+            \emph{Example}};}}
+        }%
+        {\mdfsetup{%
+                frametitle={%
+                    \tikz[baseline=(current
+                    bounding
+                    box.east),outer
+                    sep=0pt]
+                    \node[anchor=east,rectangle,fill=pink!10]
+                    {\strut
+            \emph{Example}:~#1};}}%
+        }%
+        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=pink!20,%
+            linewidth=1pt,topline=true,%
+            frametitleaboveskip=\dimexpr-\strutbox\relax
+        }
+        \begin{mdframed}[]\relax
+            \label{exmp
+            \themycoro}%
+        \begin{addmargin}[1em]{1em}}
+        {\end{addmargin}\end{mdframed}}
+
+\newenvironment{note}{%
+    \mdfsetup{
+        frametitle={Note:},
+        topline=false,bottomline=false,
+        frametitleaboveskip=-10pt,
+        innerleftmargin=-1pt,
+        linecolor=black!10,
+        linewidth=1pt
+    }
+    \begin{mdframed}      
+        \begin{addmargin}[1em]{1em}%        
+    }{\end{addmargin}\end{mdframed}}
+
+    \newenvironment{reminder}{%
+        \mdfsetup{
+            frametitle={\emph{Reminder:}},
+            topline=false,bottomline=false,
+            frametitleaboveskip=-10pt,
+            innerleftmargin=-1pt,
+            linecolor=black!10,
+            linewidth=1pt
+        }
+        \begin{mdframed}
+            \begin{addmargin}[1em]{1em}\begin{em}%
+        }{\end{em}\end{addmargin}\end{mdframed}}
+\endinput
