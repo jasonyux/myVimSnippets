@@ -59,18 +59,19 @@ snippet subsec* "subsection{}" bA
 endsnippet
 
 snippet sec "section{}" b
+\newpage
 \section{$1}
 \label{sec:$1}
 $0
 endsnippet
 
-snippet ssec "subsection{}" bA
+snippet ssec "subsection{}" b
 \subsection{$1}
 \label{subsec:$1}
 $0
 endsnippet
 
-snippet sssec "subsubsection{}" bA
+snippet sssec "subsubsection{}" b
 \subsubsection{$1}
 \label{subsubsec:$1}
 $0
@@ -107,25 +108,31 @@ snippet fbox "framed" w
 endsnippet
 
 snippet theo "my theorem" w
-\begin{mytheo}$1
+\begin{mytheo}[$1]
     $0
 \end{mytheo}
 endsnippet
 
 snippet def "my definition" w
-\begin{mydef}$1
+\begin{mydef}[$1]
     $0
 \end{mydef}
 endsnippet
 
 snippet coro "my corollary" w
-\begin{mycoro}$1
+\begin{mycoro}[$1]
     $0
 \end{mycoro}
 endsnippet
 
+snippet deriv "my derivation" w
+\begin{myderiv}[$1]
+    $0
+\end{myderiv}
+endsnippet
+
 snippet example "my example" w
-\begin{example}$1
+\begin{example}[$1]
     $0
 \end{example}
 endsnippet
@@ -165,6 +172,18 @@ endsnippet
 
 snippet hyref "hyperref" wA
 \hyperref[$1]{$1} $0
+endsnippet
+
+snippet bold "textbf" w
+\textbf{$1} $0
+endsnippet
+
+snippet "--(.*)--" "bold markdown" rA
+\textbf{`!p snip.rv = match.group(1)`}
+endsnippet
+
+snippet emph "italics" w
+\emph{$1} $0
 endsnippet
 
 snippet vspace "Visible Space" wA
@@ -280,20 +299,32 @@ endsnippet
 # snippet for \bar{}, pre and post
 priority 10
 context "math()"
-snippet "bar" "bar" riA
+snippet "(?<!\\h)bar" "bar" wrA
 \bar{$1}$0
 endsnippet
 
-context "math()"
-priority 10
-snippet "([a-zA-Z])bar" "bar" riA
-\bar{`!p snip.rv=match.group(1)`}
-endsnippet
+#context "math()"
+#priority 100
+#snippet "([a-zA-Z])bar" "bar" wrA
+#\bar{`!p snip.rv=match.group(1)`}
+#endsnippet
 
 priority 100
 context "math()"
-snippet "ubar" "underbar" riA
+snippet ubar "underbar" wiA
 \ubar{$1}$0
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)hbar" "h bar" iwrA
+\hbar
+endsnippet
+
+priority 10
+context "math()"
+snippet "hat" "bar" wriA
+\hat{$1}$0
 endsnippet
 
 # vector post fix
@@ -309,7 +340,7 @@ endsnippet
 
 # align
 context "math()"
-snippet ali "Align" bA
+snippet ali "Align" wbA
 \begin{align*}
 	${1:${VISUAL}}
 .\end{align*}
@@ -366,7 +397,7 @@ endsnippet
 # integral
 context "math()"
 snippet defint "definit integral" wA
-\int_{${1:a}}^{${2:b}} $0 \,d${3:t}
+\int_{${1:a}}^{${2:b}} $3 \,d${4:t} $0
 endsnippet
 
 # limit
@@ -377,7 +408,7 @@ endsnippet
 
 # partial derivatives
 context "math()"
-snippet partial "dp/dpx" wA
+snippet "(?<!\\)partial" "dp/dpx" wrA
 \frac{\partial ${1:V}}{\partial ${2:x}} $0
 endsnippet
 
@@ -407,7 +438,7 @@ endsnippet
 
 # dot product
 priority 100
-snippet ** "cdot" iA
+snippet cdot "cdot" iA
 \cdot 
 endsnippet
 
@@ -434,6 +465,7 @@ snippet NN "natural" iA
 \mathbb{N}
 endsnippet
 
+# some operators
 snippet >= "greater equal" iA
 \ge
 endsnippet
@@ -446,39 +478,65 @@ endsnippet
 context "math()"
 snippet cases "cases" wA
 \begin{cases}
-    $1
+$1
 \end{cases}
 endsnippet
 
+# text styles
 context "math()"
-snippet cos "cosine" wA
-\cos{$1} $0
+snippet script "script" w
+\mathcal{$1} $0
 endsnippet
 
+# common symbols
+priority 1000
 context "math()"
-snippet sin "sine" wA
-\sin{$1} $0
+snippet "(?<!\\)cos" "cosine" wrA
+\cos{\left( $1 \right)} $0
 endsnippet
 
+priority 1000
 context "math()"
-snippet theta "theta" wA
+snippet "(?<!\\)sin" "sine" wrA
+\sin{\left( $1 \right)} $0
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)theta" "theta" wrA
 \theta
 endsnippet
 
+priority 2000
 snippet vphi "varphi" wA
 \varphi
 endsnippet
 
+priority 1000
 context "math()"
-snippet nu "nu" wA
+snippet "(?<!\\)nu" "nu" wrA
 \nu
 endsnippet
 
+priority 1000
 context "math()"
-snippet lambda "lambda" wA
+snippet "(?<!\\)pi" "pi" wrA
+\pi
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)nabla" "nabla" wrA
+\nabla
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)lambda" "lambda" wrA
 \lambda
 endsnippet
 
+priority 1000
 context "math()"
 snippet lmda "lambda2" wA
 \lambda
@@ -489,14 +547,52 @@ snippet tild "tilde" wA
 \tilde{$1} $0
 endsnippet
 
+priority 1000
 context "math()"
 snippet NP "NP" wA
 \mathcal{NP}
 endsnippet
 
+priority 1000
 context "math()"
-snippet P "P" wA
+snippet PP "P" wA
 \mathcal{P}
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)Psi" "Psi" wrA
+\Psi
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)psi" "psi" wrA
+\psi
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)phi" "phi" wrA
+\phi
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)Phi" "Phi" wrA
+\Phi
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)omega" "omega" wrA
+\omega
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)infty" "infinity" wrA
+\infty
 endsnippet
 
 ### Start of TOC snippets
@@ -513,8 +609,9 @@ endsnippet
 snippet "(.*)(\.png|\.jpg|\.jpeg)" "insert picture" rA
 \begin{figure}[h!]
     \centering
-    \includegraphics[scale=1]{./`!p snip.rv = match.group(1)+match.group(2)`}
-\end{figure}
+    \includegraphics[scale=${1:0.5}]{./images/`!p snip.rv = match.group(1)+match.group(2)`}
+\end{figure}\\\
+$0
 endsnippet
 ### end of image sippets
 
@@ -523,5 +620,13 @@ snippet code "code section" w
 \begin{lstlisting}[language=$1]
 $0
 \end{lstlisting}
+endsnippet
+
+snippet ``` "inline code" wA
+\lstinline{$1} $0
+endsnippet
+
+snippet "`(?!`)(.*)`" "inline code 2" rA
+\lstinline{`!p snip.rv=match.group(1)`}
 endsnippet
 ### End of Code snippets
