@@ -175,15 +175,15 @@ snippet hyref "hyperref" wA
 endsnippet
 
 snippet bold "textbf" w
-\textbf{$1} $0
+\textcolor{red}{\textbf{$1}} $0
 endsnippet
 
 snippet "--(.*)--" "bold markdown" rA
-\textbf{`!p snip.rv = match.group(1)`}
+\textcolor{red}{\textbf{`!p snip.rv = match.group(1)`}}
 endsnippet
 
 snippet emph "italics" w
-\emph{$1} $0
+\textcolor{blue}{\emph{$1}} $0
 endsnippet
 
 snippet vspace "Visible Space" wA
@@ -358,6 +358,12 @@ snippet () "left( right)" iA
 \left(${1:${VISUAL}}\right)$0
 endsnippet
 
+# square brackets
+context "math()"
+snippet [] "left[ right]" iA
+\left[${1:${VISUAL}}\right]$0
+endsnippet
+
 # bmatrix
 snippet bmat "bmat" iA
 \begin{bmatrix} 
@@ -412,10 +418,22 @@ snippet "(?<!\\)partial" "dp/dpx" wrA
 \frac{\partial ${1:V}}{\partial ${2:x}} $0
 endsnippet
 
+# 2nd partial derivatives
+context "math()"
+snippet "(?<!\\)2part" "d2p/dpx2" wrA
+\frac{\partial^2 ${1:V}}{\partial ${2:x}^2} $0
+endsnippet
+
 # derivatives
 context "math()"
 snippet deriv "d/dx" wA
 \frac{d ${1:V}}{d ${2:x}} $0
+endsnippet
+
+# 2nd derivatives
+context "math()"
+snippet 2deriv "d2/dx2" wA
+\frac{d^2 ${1:V}}{d ${2:x}^2} $0
 endsnippet
 
 # square root
@@ -484,7 +502,7 @@ endsnippet
 
 # text styles
 context "math()"
-snippet script "script" w
+snippet mscript "mscript" wA
 \mathcal{$1} $0
 endsnippet
 
@@ -503,8 +521,56 @@ endsnippet
 
 priority 1000
 context "math()"
+snippet "(?<!\\)bket" "braket" wrA
+\braket{$1 | $2} $0
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)dag" "dagger" wrA
+\dagger
+endsnippet
+
+priority 1000
+context "math()"
 snippet "(?<!\\)theta" "theta" wrA
 \theta
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)xi" "xi" wrA
+\xi
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)delta" "delta" wrA
+\delta
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)sigma" "sigma" wrA
+\sigma
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)alpha" "alpha" wrA
+\alpha
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)beta" "beta" wrA
+\beta
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)gamma" "gamma" wrA
+\gamma
 endsnippet
 
 priority 2000
@@ -516,6 +582,18 @@ priority 1000
 context "math()"
 snippet "(?<!\\)nu" "nu" wrA
 \nu
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)mu" "mu" wrA
+\mu
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)eps" "epsilon" wrA
+\epsilon
 endsnippet
 
 priority 1000
