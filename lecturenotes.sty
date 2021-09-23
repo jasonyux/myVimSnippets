@@ -10,6 +10,8 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{scrextend}
+\usepackage{esint}
+\usepackage{mathtools}
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -20,6 +22,15 @@
 
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{wrapfig}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}{Definition}[section]
+
+\newcommand\myperm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\mycomb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -175,6 +186,39 @@
         \begin{mdframed}[]\relax
             \label{example:\themycoro}%
         \begin{addmargin}[1.5em]{1em}}
+        {\end{addmargin}\end{mdframed}}
+
+\newcounter{myderiv}[section]\setcounter{myderiv}{0}
+\renewcommand{\themyderiv}{\arabic{section}.\arabic{myderiv}}
+\newenvironment{myderiv}[1][]{%
+    \refstepcounter{myderiv}%
+    \ifstrempty{#1}%
+        {\mdfsetup{%
+                frametitle={%
+                    \tikz[baseline=(current
+                    bounding
+                    box.east),outer
+                    sep=0pt]
+                    \node[anchor=east,rectangle,fill=orange!10]
+                    {\strut
+            Derivation};}}
+        }%
+        {\mdfsetup{%
+                frametitle={%
+                    \tikz[baseline=(current
+                    bounding
+                    box.east),outer
+                    sep=0pt]
+                    \node[anchor=east,rectangle,fill=orange!10]
+                    {\strut
+            Derivation:~#1};}}%
+        }%
+        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=orange!10,%
+            linewidth=1pt,topline=true,%
+            frametitleaboveskip=\dimexpr-\strutbox\relax
+        }
+        \begin{mdframed}[]\relax%
+            \label{deriv:\themyderiv}\begin{addmargin}[1.5em]{1em}}
         {\end{addmargin}\end{mdframed}}
 
 \newenvironment{note}{%
