@@ -82,3 +82,11 @@ int main()
 	return 0;
 }
 endsnippet
+
+# kernel development related
+
+# while loop
+context "comment()"
+snippet printk "while" wi
+printk(KERN_DEBUG "$1");$0
+endsnippet

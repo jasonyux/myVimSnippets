@@ -101,29 +101,59 @@ snippet item "Item" w
 \item $0
 endsnippet
 
+
+snippet line "line" w
+\noindent\rule{5cm}{0.4pt}\\\
+$0
+endsnippet
+
 snippet fbox "framed" w
 \begin{framed}
     $0 
 \end{framed}
 endsnippet
 
-snippet theo "my theorem" w
-\begin{mytheo}[$1]
+snippet proof "proof" w
+\begin{proof}[$1]
     $0
-\end{mytheo}
+\end{proof}
 endsnippet
+
+snippet theo "my theorem" w
+\begin{theorem}
+    $0
+\end{theorem}
+endsnippet
+
+#snippet theo "my theorem" w
+#\begin{mytheo}[$1]
+#    $0
+#\end{mytheo}
+#endsnippet
 
 snippet def "my definition" w
-\begin{mydef}[$1]
+\begin{definition}[$1]
     $0
-\end{mydef}
+\end{definition}
 endsnippet
 
+#snippet def "my definition" w
+#\begin{mydef}[$1]
+#    $0
+#\end{mydef}
+#endsnippet
+
 snippet coro "my corollary" w
-\begin{mycoro}[$1]
+\begin{corollary}
     $0
-\end{mycoro}
+\end{corollary}
 endsnippet
+
+#snippet coro "my corollary" w
+#\begin{mycoro}[$1]
+#    $0
+#\end{mycoro}
+#endsnippet
 
 snippet deriv "my derivation" w
 \begin{myderiv}[$1]
@@ -164,6 +194,14 @@ $1
 \] $0
 endsnippet
 
+snippet mit "Math italic" w
+\mathit{$1} $0
+endsnippet
+
+snippet mrm "Math rm" wA
+\mathrm{$1} $0
+endsnippet
+
 ### End of Environment snippets
 
 snippet aref "autoref" wA
@@ -174,16 +212,21 @@ snippet hyref "hyperref" wA
 \hyperref[$1]{$1} $0
 endsnippet
 
-snippet bold "textbf" w
+# flipped with emph
+snippet emph "textbf" w
 \textcolor{red}{\textbf{$1}} $0
 endsnippet
 
 snippet "--(.*)--" "bold markdown" rA
+\textbf{`!p snip.rv = match.group(1)`}
+endsnippet
+
+snippet "==(.*)==" "highlight markdown" rA
 \textcolor{red}{\textbf{`!p snip.rv = match.group(1)`}}
 endsnippet
 
-snippet emph "italics" w
-\textcolor{blue}{\emph{$1}} $0
+snippet bold "italics" w
+\textbf{$1} $0
 endsnippet
 
 snippet vspace "Visible Space" wA
@@ -339,8 +382,7 @@ snippet "vec" "Vector prefix" riA
 endsnippet
 
 # align
-context "math()"
-snippet ali "Align" wbA
+snippet ali "Align" wb
 \begin{align*}
 	${1:${VISUAL}}
 .\end{align*}
@@ -364,11 +406,24 @@ snippet [] "left[ right]" iA
 \left[${1:${VISUAL}}\right]$0
 endsnippet
 
+# magnitude
+context "math()"
+snippet || "left[ right]" iA
+\left|${1:${VISUAL}}\right|$0
+endsnippet
+
 # bmatrix
 snippet bmat "bmat" iA
 \begin{bmatrix} 
     $1 
 \end{bmatrix} $0
+endsnippet
+
+# bmatrix
+snippet Bmat "Bmat" iA
+\begin{Bmatrix} 
+    $1 
+\end{Bmatrix} $0
 endsnippet
 
 # left right angle
@@ -390,13 +445,19 @@ endsnippet
 
 # text block
 context "math()"
-snippet textB "textBlock" iA
-\text{ $1 } $0
+snippet txt "textBlock" i
+\text{$1} $0
 endsnippet
 
 # summation
 context "math()"
 snippet sum "sum" wA
+\sum\limits_{${1:n}} $0
+endsnippet
+
+# summation
+context "math()"
+snippet Sum "Sum" wA
 \sum\limits_{n=${1:1}}^{${2:\infty}} $0
 endsnippet
 
@@ -450,7 +511,7 @@ endsnippet
 
 # cross product
 context "math()"
-snippet xx "cross" iA
+snippet ** "cross" iA
 \times 
 endsnippet
 
@@ -502,11 +563,23 @@ endsnippet
 
 # text styles
 context "math()"
-snippet mscript "mscript" wA
+snippet mS "mscript" wA
 \mathcal{$1} $0
 endsnippet
 
 # common symbols
+priority 1000
+context "math()"
+snippet "(?<!\\)up" "uparrow" wr
+\uparrow $0
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)down" "downarrow" wr
+\downarrow $0
+endsnippet
+
 priority 1000
 context "math()"
 snippet "(?<!\\)cos" "cosine" wrA
@@ -539,14 +612,32 @@ endsnippet
 
 priority 1000
 context "math()"
+snippet "(?<!\\)Theta" "Theta" wrA
+\Theta
+endsnippet
+
+priority 1000
+context "math()"
 snippet "(?<!\\)xi" "xi" wrA
 \xi
 endsnippet
 
 priority 1000
 context "math()"
+snippet "(?<!\\)chi" "chi" wrA
+\chi
+endsnippet
+
+priority 1000
+context "math()"
 snippet "(?<!\\)delta" "delta" wrA
 \delta
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)Delta" "Delta" wrA
+\Delta
 endsnippet
 
 priority 1000
@@ -571,6 +662,12 @@ priority 1000
 context "math()"
 snippet "(?<!\\)gamma" "gamma" wrA
 \gamma
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)rho" "rho" wrA
+\rho
 endsnippet
 
 priority 2000
@@ -651,7 +748,7 @@ endsnippet
 
 priority 1000
 context "math()"
-snippet "(?<!\\)phi" "phi" wrA
+snippet "(?<!\\)(?<!(var))phi" "phi" wrA
 \phi
 endsnippet
 
@@ -665,6 +762,12 @@ priority 1000
 context "math()"
 snippet "(?<!\\)omega" "omega" wrA
 \omega
+endsnippet
+
+priority 1000
+context "math()"
+snippet "(?<!\\)Omega" "Omega" wrA
+\Omega
 endsnippet
 
 priority 1000
@@ -688,8 +791,21 @@ snippet "(.*)(\.png|\.jpg|\.jpeg)" "insert picture" rA
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=${1:0.5}]{./images/`!p snip.rv = match.group(1)+match.group(2)`}
+    ${2:\caption{}}
+    ${3:\label{fig:}}
 \end{figure}\\\
 $0
+endsnippet
+
+snippet mfig "multiple figures" wA
+\begin{figure}
+    \begin{subfigure}{${1:0.5}\textwidth}
+        \centering
+        \caption{Publication Flooding}
+    \end{subfigure}%
+    ${2:\caption{}}
+    ${3:\label{fig:}}
+\end{figure}\\\
 endsnippet
 ### end of image sippets
 
