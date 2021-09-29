@@ -1,20 +1,15 @@
 # math context
 global !p
-texMathZones = ['texMathZone' + x for x in ['A', 'AS', 'B', 'BS', 'C', 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS', 'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z', 'AmsA', 'AmsB', 'AmsC', 'AmsD', 'AmsE', 'AmsF', 'AmsG', 'AmsAS', 'AmsBS', 'AmsCS', 'AmsDS', 'AmsES', 'AmsFS', 'AmsGS' ]]
-texIgnoreMathZones = ['texMathText']
-texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
-texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
-ignore = texIgnoreMathZoneIds[0]
 def math():
-	currentline = vim.current.line
-	if "mmath" in currentline:
-		return False
-	synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
-	try:
-		first = next(i for i in reversed(synstackids) if i in texIgnoreMathZoneIds or i in texMathZoneIds)
-		return first != ignore
-	except StopIteration:
-		return False
+    return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment():
+    return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')")
+    return x != '0' and x != '0'
+
 endglobal
 
 # snippet for starting a template
@@ -283,6 +278,7 @@ snippet ^ "superscript" iA
 ^{$1}$0
 endsnippet
 
+priority 1000
 context "math()"
 snippet // "Fraction" iA
 \\frac{$1}{$2}$0
@@ -564,7 +560,12 @@ endsnippet
 # text styles
 context "math()"
 snippet mS "mscript" wA
-\mathcal{$1} $0
+\mathcal{$1}$0
+endsnippet
+
+context "math()"
+snippet mB "mbb" wA
+\mathbb{$1}$0
 endsnippet
 
 # common symbols
