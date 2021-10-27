@@ -109,13 +109,13 @@ snippet fbox "framed" w
 endsnippet
 
 snippet proof "proof" w
-\begin{proof}[$1]
+\begin{proof}[Proof$1]
     $0
 \end{proof}
 endsnippet
 
 snippet theo "my theorem" w
-\begin{theorem}
+\begin{theorem}[$1]
     $0
 \end{theorem}
 endsnippet
@@ -139,7 +139,7 @@ endsnippet
 #endsnippet
 
 snippet coro "my corollary" w
-\begin{corollary}
+\begin{corollary}[$1]
     $0
 \end{corollary}
 endsnippet
@@ -172,6 +172,10 @@ snippet reminder "my reminder" w
 \begin{reminder}$1
     $0
 \end{reminder}
+endsnippet
+
+snippet comb "combination" w
+\begin{pmatrix}$1 \\\ $0\end{pmatrix}
 endsnippet
 
 snippet inm "Math" wA
@@ -791,21 +795,24 @@ endsnippet
 snippet "(.*)(\.png|\.jpg|\.jpeg)" "insert picture" rA
 \begin{figure}[h!]
     \centering
-    \includegraphics[scale=${1:0.5}]{./images/`!p snip.rv = match.group(1)+match.group(2)`}
-    ${2:\caption{}}
+    \includegraphics[scale=${1:0.5}]{./images/`!p snip.rv = match.group(1).strip()+match.group(2)`}
+    \caption{$2}
     ${3:\label{fig:}}
 \end{figure}\\\
 $0
 endsnippet
 
 snippet mfig "multiple figures" wA
-\begin{figure}
-    \begin{subfigure}{${1:0.5}\textwidth}
-        \centering
-        \caption{Publication Flooding}
-    \end{subfigure}%
-    ${2:\caption{}}
-    ${3:\label{fig:}}
+\begin{figure}[h!]
+    \subfigure[${1:Accuracy Comparison}]{%
+        \label{fig:acc_comp}%
+    \includegraphics[scale=0.4]{./images/q4_acc.png}}%
+    \qquad
+    \subfigure[${2:Precision Comparison}]{%
+        \label{fig:prec_comp}%
+    \includegraphics[scale=0.4]{./images/q4_prec.png}}%
+    \caption{${3:Test Performance Comparisons between MLE, KNN, and Naive Bayes}}
+    \label{fig:test_perf_comp}
 \end{figure}\\\
 endsnippet
 ### end of image sippets
