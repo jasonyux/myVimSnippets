@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
-\usepackage{amsmath, amssymb, amsthm, framed}
+\usepackage{amsmath, amssymb, amsthm}
 \usepackage[framemethod=TikZ]{mdframed}
 \usepackage{accents}
 \usepackage[utf8]{inputenc}
@@ -81,9 +81,10 @@
                     {\strut
             Theorem~\themytheo:~#1};}}%
         }%
-        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=blue!10,%
+        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,%
+            linecolor=blue!10,%
             linewidth=1pt,topline=true,%
-            frametitleaboveskip=\dimexpr-\strutbox\relax
+            frametitleaboveskip=\dimexpr%-\strutbox\relax
         }
         \begin{mdframed}[]\relax%
             \label{theo:\themytheo}%s
@@ -115,9 +116,10 @@
                     {\strut
             Corollary~\themycoro:~#1};}}%
         }%
-        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=green!10,%
+        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,%
+            linecolor=green!10,%
             linewidth=1pt,topline=true,%
-            frametitleaboveskip=\dimexpr-\strutbox\relax
+            frametitleaboveskip=\dimexpr%-\strutbox\relax
         }
         \begin{mdframed}[]\relax
             \label{coro:\themycoro}%
@@ -149,9 +151,10 @@
                     {\strut
             Definition~\themydef:~#1};}}%
         }%
-        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=red!10,%
+        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,%
+            linecolor=red!10,%
             linewidth=1pt,topline=true,%
-            frametitleaboveskip=\dimexpr-\strutbox\relax
+            frametitleaboveskip=\dimexpr%-\strutbox\relax
         }
         \begin{mdframed}[]\relax%
             \label{def:\themydef}\begin{addmargin}[1.5em]{1em}}
@@ -179,9 +182,11 @@
                     {\strut
             \emph{Example}:~#1};}}%
         }%
-        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=pink!20,%
-            linewidth=1pt,topline=true,%
-            frametitleaboveskip=\dimexpr-\strutbox\relax
+        \mdfsetup{
+            innertopmargin=5pt,innerleftmargin=-1pt,%
+            linecolor=pink!10, linewidth=1pt,%
+            topline=true,%
+            frametitleaboveskip=\dimexpr%-\strutbox\relax
         }
         \begin{mdframed}[]\relax
             \label{example:\themycoro}%
@@ -213,9 +218,10 @@
                     {\strut
             Derivation:~#1};}}%
         }%
-        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,linecolor=orange!10,%
+        \mdfsetup{innertopmargin=5pt,innerleftmargin=-1pt,%
+            linecolor=orange!10,%
             linewidth=1pt,topline=true,%
-            frametitleaboveskip=\dimexpr-\strutbox\relax
+            frametitleaboveskip=\dimexpr%-\strutbox\relax
         }
         \begin{mdframed}[]\relax%
             \label{deriv:\themyderiv}\begin{addmargin}[1.5em]{1em}}
