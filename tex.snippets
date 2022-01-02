@@ -1,5 +1,7 @@
 # math context
 global !p
+# Alternatively, place the functions in `~/.vim/pythonx/xxx.py`
+# then do here: `from xxx import *` to make those functions available
 def math():
     return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 
@@ -9,6 +11,36 @@ def comment():
 def env(name):
     [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')")
     return x != '0' and y != '0'
+
+# given a snip object (check documentation), returns the word current cursor is at
+def curr_word_from_snip(snip):
+    # find the current word
+    curr_pos = snip.column
+    curr_line = snip.buffer[snip.line]
+    # find left bound
+    left_bound = curr_pos - 1
+    while left_bound > 0 and curr_line[left_bound] != " ":
+        left_bound -= 1
+    # find right bound
+    right_bound = curr_pos + 1
+    while right_bound < len(curr_line) and curr_line[right_bound] != " ":
+        right_bound += 1
+    matched = curr_line[left_bound:right_bound]
+    return matched.strip()
+
+greek_lists = [
+	"alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta",
+	"iota", "kappa", "lambda", "mu", "nu", "xi", "omicron", "pi", "rho",
+	"sigma", "tau", "upsilon", "phi", "chi", "psi", "omega"
+]
+
+# returns true if the word is within the greek list above
+def is_greek_symbol(snip):
+    if not math():
+        return False
+    # find the current word
+    word = curr_word_from_snip(snip)
+    return word.lower() in greek_lists
 
 endglobal
 
@@ -609,70 +641,13 @@ snippet "(?<!\\)dag" "dagger" wrA
 \dagger
 endsnippet
 
+# test regular expression to match all greek words
+# the regex is generated from Dropbox/Projects/regex_from_list (basically, given a list of words, generate regex exp)
+# the is_greek_symbol(snip) checks if the current word the cursor is at is within the greek_list variable defined above
 priority 1000
-context "math()"
-snippet "(?<!\\)theta" "theta" wrA
-\theta
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)Theta" "Theta" wrA
-\Theta
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)xi" "xi" wrA
-\xi
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)chi" "chi" wrA
-\chi
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)delta" "delta" wrA
-\delta
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)Delta" "Delta" wrA
-\Delta
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)sigma" "sigma" wrA
-\sigma
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)alpha" "alpha" wrA
-\alpha
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)beta" "beta" wrA
-\beta
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)gamma" "gamma" wrA
-\gamma
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)rho" "rho" wrA
-\rho
+# context "math()"
+snippet '(?<!\\)([a-zA-Z][a-z]?[a-z]?[acpgmhibt]?[aldr]?[oa]?[n]?)' "greek letters" "is_greek_symbol(snip)" wreA
+\\`!p snip.rv = match.group(1).strip()`
 endsnippet
 
 priority 2000
@@ -682,44 +657,8 @@ endsnippet
 
 priority 1000
 context "math()"
-snippet "(?<!\\)nu" "nu" wrA
-\nu
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)mu" "mu" wrA
-\mu
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)eps" "epsilon" wrA
-\epsilon
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)pi" "pi" wrA
-\pi
-endsnippet
-
-priority 1000
-context "math()"
 snippet "(?<!\\)nabla" "nabla" wrA
 \nabla
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)lambda" "lambda" wrA
-\lambda
-endsnippet
-
-priority 1000
-context "math()"
-snippet lmda "lambda2" wA
-\lambda
 endsnippet
 
 context "math()"
@@ -737,42 +676,6 @@ priority 1000
 context "math()"
 snippet PP "P" wA
 \mathcal{P}
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)Psi" "Psi" wrA
-\Psi
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)psi" "psi" wrA
-\psi
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)(?<!(var))phi" "phi" wrA
-\phi
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)Phi" "Phi" wrA
-\Phi
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)omega" "omega" wrA
-\omega
-endsnippet
-
-priority 1000
-context "math()"
-snippet "(?<!\\)Omega" "Omega" wrA
-\Omega
 endsnippet
 
 priority 1000
