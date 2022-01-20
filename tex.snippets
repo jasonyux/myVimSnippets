@@ -175,7 +175,7 @@ snippet reminder "my reminder" w
 endsnippet
 
 snippet comb "combination" w
-\begin{pmatrix}$1 \\\ $0\end{pmatrix}
+{$1 \choose $2 }$0
 endsnippet
 
 snippet inm "Math" wA
@@ -798,12 +798,13 @@ snippet "(.*)(\.png|\.jpg|\.jpeg)" "insert picture" rA
     \includegraphics[scale=${1:0.5}]{./images/`!p snip.rv = match.group(1).strip()+match.group(2)`}
     \caption{$2}
     ${3:\label{fig:}}
-\end{figure}\\\
+\end{figure}\leavevmode\newline
 $0
 endsnippet
 
 snippet mfig "multiple figures" wA
 \begin{figure}[h!]
+    \centering
     \subfigure[${1:Accuracy Comparison}]{%
         \label{fig:acc_comp}%
     \includegraphics[scale=0.4]{./images/q4_acc.png}}%
@@ -813,7 +814,7 @@ snippet mfig "multiple figures" wA
     \includegraphics[scale=0.4]{./images/q4_prec.png}}%
     \caption{${3:Test Performance Comparisons between MLE, KNN, and Naive Bayes}}
     \label{fig:test_perf_comp}
-\end{figure}\\\
+\end{figure}\leavevmode\newline
 endsnippet
 ### end of image sippets
 
