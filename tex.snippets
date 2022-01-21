@@ -19,13 +19,13 @@ def curr_word_from_snip(snip):
     curr_line = snip.buffer[snip.line]
     # find left bound
     left_bound = curr_pos - 1
-    while left_bound > 0 and curr_line[left_bound] != " ":
+    while left_bound > 0 and curr_line[left_bound].isalpha():
         left_bound -= 1
     # find right bound
     right_bound = curr_pos + 1
-    while right_bound < len(curr_line) and curr_line[right_bound] != " ":
+    while right_bound < len(curr_line) and curr_line[right_bound].isalpha():
         right_bound += 1
-    matched = curr_line[left_bound:right_bound]
+    matched = curr_line[left_bound+1:right_bound]
     return matched.strip()
 
 greek_lists = [
@@ -664,6 +664,21 @@ endsnippet
 context "math()"
 snippet tild "tilde" wA
 \tilde{$1} $0
+endsnippet
+
+context "math()"
+snippet 1ind "1 - indicator" wA
+\mathbbm{1}\{$1\} $0
+endsnippet
+
+context "math()"
+snippet '([a-zA-Z]+)abovearrow' "xxx above arrow" wreA
+\\xrightarrow[]{`!p snip.rv = match.group(1).strip()`}$0
+endsnippet
+
+context "math()"
+snippet '([a-zA-Z]+)belowarrow' "xxx below arrow" wreA
+\\xrightarrow[`!p snip.rv = match.group(1).strip()`]{}$0
 endsnippet
 
 priority 1000
